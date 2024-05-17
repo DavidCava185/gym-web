@@ -31,7 +31,12 @@ const routes: any = [
     component: () => import('../views/AppView.vue'),
     meta: {
       requiresAuth: true,
-    }
+    },
+    children: [
+      {
+        path: ''
+      }
+    ]
   }
 ]
 
