@@ -2,6 +2,12 @@ import { createRouter, createWebHistory, type NavigationGuardNext, type RouteLoc
 import LoginView from '../views/LoginView.vue'
 import ls from '@/composable/local-storage.composable';
 import { useSessionStore } from '@/stores/session/session.store';
+import Login from '@/components/Login.vue';
+import HomeUser from '@/components/HomeUser.vue';
+import HomeTrainer from '@/components/HomeTrainer.vue';
+import UserProfile from '@/components/UserProfile.vue';
+import TrainerProfile from '@/components/TrainerProfile.vue';
+import UserManagement from '@/components/UserManagement.vue';
 
 const authenticated: string | null = ls.get('authenticated');
 
@@ -11,19 +17,34 @@ const routes: any = [
     redirect: (): any => {
       if (authenticated) {
         return { name: 'app' };
-         
       } else {
         return { name: 'login' }; 
       }
     }
   },
   {
-    path: '/login',
-    name: 'login',
+    path: '/auth',
+    name: 'auth',
     component: LoginView,
     meta: {
       requiresAuth: false,
-    }
+    },
+    redirect: { name: 'login' },
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: Login,
+      },
+      {
+        path: 'login/trainer',
+        name: 'loginTrainer',
+        component: Login,
+        meta: {
+          isTrainer: true,
+        },
+      }
+    ]
   },
   {
     path: '/',
@@ -34,8 +55,47 @@ const routes: any = [
     },
     children: [
       {
-        path: ''
-      }
+        path: 'user-home',
+        name: 'UserHome',
+        component: HomeUser,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'trainer-home',
+        name: 'TrainerHome',
+        component: HomeTrainer,
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: 'user-management',
+            name: 'UserManagement',
+            component: UserManagement,
+            meta: {
+              requiresAuth: true,
+            },
+          },
+        ]
+      },
+      {
+        path: 'user-profile',
+        name: 'UserProfile',
+        component: UserProfile,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: 'trainer-profile',
+        name: 'TrainerProfile',
+        component: TrainerProfile,
+        meta: {
+          requiresAuth: true,
+        },
+      },
     ]
   }
 ]

@@ -1,46 +1,74 @@
 <template>
-    <v-sheet class="mx-auto" width="300">
-      <v-form fast-fail @submit.prevent>
+  <div class="h-100">
+    <v-sheet width="30em">
+      <v-form v-model="isValidForm" fast-fail @submit.prevent="submitForm">
         <v-text-field
-          v-model="firstName"
-          :rules="firstNameRules"
+          v-model="email"
+          :rules="emailRules"
           label="mail"
         ></v-text-field>
   
         <v-text-field
-          v-model="lastName"
-          :rules="lastNameRules"
+          v-model="password"
+          :rules="passwordRules"
           label="Password"
+          type="password"
         ></v-text-field>
   
         <v-btn class="mt-2" type="submit" block>Login</v-btn>
       </v-form>
     </v-sheet>
-  </template>
+  </div>
+</template>
 
   
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { useSessionStore } from '@/stores/session/session.store';
+import { mapActions } from 'pinia';
+import { defineComponent } from 'vue';
   
   export default defineComponent({
     name: 'Login',
-      data: () => ({
-        firstName: '',
-        firstNameRules: [
-          (value: any) => {
-            if (value?.length > 3) return true
-  
-            return 'First name must be at least 3 characters.'
-          },
-        ],
-        lastName: '123',
-        lastNameRules: [
-          (value: any) => {
-            if (/[^0-9]/.test(value)) return true
-  
-            return 'Last name can not contain digits.'
-          },
-        ],
-      }),
-    });
+    data: () => ({
+      isValidForm: false,
+      email: 'test@test.com',
+      emailRules: [
+        (value: any) => {
+          if (value) return true
+
+          return 'El email no puede estar vacío'
+        },
+      ],
+      password: 'test',
+      passwordRules: [
+        (value: any) => {
+          if (value) return true
+
+          return 'La contraseña no puede estar vacía'
+        },
+      ],
+    }),
+    created () {
+      console.log(this.$route.meta.isTrainer)
+
+    },
+    methods: {
+      ...mapActions(useSessionStore, [ 'login', 'loginTrainer' ]),
+      async submitForm () {
+        if (this.isValidForm) {
+          if (this.$route.meta.isTrainer) {
+            await this.loginTrainer({
+            email: this.email,
+            password: this.password
+          });
+          } else {
+            await this.login({
+            email: this.email,
+            password: this.password
+          });
+          }
+        }
+      }
+    }
+  });
   </script>

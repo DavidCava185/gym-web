@@ -15,35 +15,8 @@ export default class Service {
     this.axios = Axios.create({
       baseURL: `${options.baseUri || 'http://localhost:3000'}${options.namespace || ''}`,
       responseType: 'json',
-      withCredentials: true
+      withCredentials: false
     });
-
-    this.axios.interceptors.response.use(
-      this._responseInterceptorFullFilled,
-      this._responseInterceptorRejected
-    );
-  }
-
-  private _responseInterceptorFullFilled () {
-    return (response: any) => response;
-  }
-
-  private async _responseInterceptorRejected (err: any): Promise<never> {
-    if (
-      err &&
-      err.response &&
-      err.response.status === HttpStatusCodes.UNAUTHORIZED &&
-      router.currentRoute.value.meta?.requiresAuth
-    ) {
-      await Swal.fire({
-        title: 'La sesión expiró',
-        text: 'Vuelve a Logearte',
-        icon: 'warning'
-      });
-      const store = useSessionStore();
-      await store.logout();
-    }
-    return Promise.reject(err);
   }
 
   async request (options: ServiceRequestInterface): Promise<any> {

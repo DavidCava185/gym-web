@@ -2,9 +2,11 @@ function setLocalStorage (key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-function getLocalStorage (key:string): string | null {
+function getLocalStorage (key: string): string | null {
     let value: string | null = localStorage.getItem(key);
-    value = value && JSON.parse(value);
+    if (value) {
+        value = JSON.parse(value);
+    }
     return value;
 }
 

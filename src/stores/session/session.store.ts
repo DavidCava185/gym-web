@@ -26,7 +26,7 @@ export const useSessionStore = defineStore('session', {
       try {
         this.sessionFetching = true;
         
-        const { data } = await service.request({
+        const data = await service.request({
           url: '/login',
           method: 'post',
           data: {
@@ -35,8 +35,35 @@ export const useSessionStore = defineStore('session', {
           }
         });
         
-        ls.set('authenticated', data);
-        await router.push({ name: 'Home' });
+        if (data) {
+          ls.set('authenticated', data);
+        }
+        await router.push({ name: 'UserHome' });
+      } catch (err) {
+        console.error(err)
+      } finally {
+        this.sessionFetching = false;
+      }
+    },
+
+    async loginTrainer (loginPayload: any): Promise<void> {
+      try {
+        this.sessionFetching = true;
+        
+        const data = await service.request({
+          url: '/login/trainer',
+          method: 'post',
+          data: {
+            email: loginPayload.email,
+            password: loginPayload.password,
+          }
+        });
+        
+        if (data) {
+          ls.set('authenticated', data);
+          ls.set('is-trainer', true);
+        }
+        await router.push({ name: 'TrainerHome' });
       } catch (err) {
         console.error(err)
       } finally {
@@ -47,6 +74,7 @@ export const useSessionStore = defineStore('session', {
     async logout (): Promise<void> {
       try {
         ls.set('authenticated', false);
+        ls.set('is-trainer', false);
         await router.push({ name: 'login' });
       } catch (err) {
         console.error(err)
