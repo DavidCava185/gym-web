@@ -7,7 +7,6 @@ import HomeUser from '@/components/HomeUser.vue';
 import HomeTrainer from '@/components/HomeTrainer.vue';
 import UserProfile from '@/components/UserProfile.vue';
 import TrainerProfile from '@/components/TrainerProfile.vue';
-import UserManagement from '@/components/UserManagement.vue';
 
 const authenticated: string | null = ls.get('authenticated');
 
@@ -66,14 +65,6 @@ const routes: any = [
         path: 'trainer-home',
         name: 'TrainerHome',
         component: HomeTrainer,
-        meta: {
-          requiresAuth: true,
-        },
-      },
-      {
-        path: 'user-management',
-        name: 'UserManagement',
-        component: UserManagement,
         meta: {
           requiresAuth: true,
         },

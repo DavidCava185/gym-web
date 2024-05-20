@@ -1,6 +1,5 @@
 <template>
     <div>
-        <v-btn size="large" @click="goToUserManagement">Admin Users</v-btn>
         <v-row>
             <v-col v-for="col in cols" cols="auto" md="40">
                 <v-card>
@@ -33,9 +32,7 @@ export default defineComponent({
         }
     },
     methods: {
-        goToUserManagement () {
-            this.$router.push({ name: 'UserManagement' });
-        }
+
     }
 });
 </script>
