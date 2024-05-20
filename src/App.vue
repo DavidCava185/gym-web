@@ -1,11 +1,16 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <router-view />
 </template>
 
-<style>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: "App",
+})
+</script>
+
+<style lang="scss">
 
 </style>

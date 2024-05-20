@@ -36,6 +36,7 @@ export const useSessionStore = defineStore('session', {
         });
         
         if (data) {
+          this.me = data;
           ls.set('authenticated', data);
         }
         await router.push({ name: 'UserHome' });

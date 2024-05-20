@@ -69,16 +69,14 @@ const routes: any = [
         meta: {
           requiresAuth: true,
         },
-        children: [
-          {
-            path: 'user-management',
-            name: 'UserManagement',
-            component: UserManagement,
-            meta: {
-              requiresAuth: true,
-            },
-          },
-        ]
+      },
+      {
+        path: 'user-management',
+        name: 'UserManagement',
+        component: UserManagement,
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: 'user-profile',
