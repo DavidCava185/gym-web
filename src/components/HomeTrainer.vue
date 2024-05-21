@@ -1,6 +1,7 @@
 <template>
     <div class="pt-10 d-flex flex-column ga-10 align-end">
-        <v-btn width="20em" >Crear actividad</v-btn>
+        <v-btn width="20em" @click="">Crear actividad</v-btn>
+        
         <v-card class="w-100">
             <v-card-title>
                 Mis próximas actividades
@@ -67,8 +68,10 @@ export default defineComponent({
         await this.getAllActivities()
     },
     methods: {
-        ...mapActions(useActivitiesStore, ['getAllActivities']),
+        ...mapActions(useActivitiesStore, ['getAllActivities','createActivity']),
+        submitActivity () {
 
+        }
     }
 });
 </script>
