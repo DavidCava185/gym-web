@@ -13,7 +13,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/font": "^7.4.47",
+    "@mdi/js": "^7.4.47",
     "axios": "^1.6.8",
     "http-status-codes": "^2.3.0",
     "pinia": "^2.1.7",
