@@ -9,6 +9,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as Components from 'vuetify/components'
 import { VCalendar } from 'vuetify/labs/VCalendar'
+import { VDateInput } from 'vuetify/labs/VDateInput'
+import { VTimePicker } from 'vuetify/labs/VTimePicker'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'
 
@@ -18,7 +20,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(createVuetify({
-    components: {...Components, VCalendar},
+    components: {...Components, VCalendar, VDateInput, VTimePicker},
     icons: {
         defaultSet: 'mdi',
         aliases,

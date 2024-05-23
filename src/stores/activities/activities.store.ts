@@ -26,9 +26,7 @@ export const useActivitiesStore = defineStore('activities', {
                     url: '',
                     method: 'post',
                     data: {
-                        name: activity.name,
-                        roomId: activity.roomId,
-                        activityTypeId: activity.activityTypeId,
+                        ...activity,
                     }
                 });
             } catch (err) {

@@ -1,11 +1,11 @@
 <template>
-  <div class="h-100">
-    <v-sheet width="30em">
+  <div class="h-100 pt-10">
+    <v-sheet width="30em" class="h-100 d-flex flex-column justify-center">
       <v-form v-model="isValidForm" fast-fail @submit.prevent="submitForm">
         <v-text-field
           v-model="email"
           :rules="emailRules"
-          label="mail"
+          label="Email"
         ></v-text-field>
   
         <v-text-field
@@ -15,7 +15,7 @@
           type="password"
         ></v-text-field>
   
-        <v-btn class="mt-2" type="submit" block>Login</v-btn>
+        <v-btn class="mt-2" type="submit" color="red" block>Login</v-btn>
       </v-form>
     </v-sheet>
   </div>
@@ -31,7 +31,7 @@ import { defineComponent } from 'vue';
     name: 'Login',
     data: () => ({
       isValidForm: false,
-      email: 'test@test.com',
+      email: 'hugo@user.com',
       emailRules: [
         (value: any) => {
           if (value) return true
@@ -39,7 +39,7 @@ import { defineComponent } from 'vue';
           return 'El email no puede estar vacío'
         },
       ],
-      password: 'test',
+      password: 'hugo',
       passwordRules: [
         (value: any) => {
           if (value) return true

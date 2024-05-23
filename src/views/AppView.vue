@@ -1,13 +1,15 @@
 <template>
-  <v-layout class="w-200">
+  <v-layout class="h-100 w-100">
     <v-app-bar color="red">
       <v-img src="src\assets\Icono_gym.png"></v-img>
       <v-btn @click="logout">
-        <svg-icon type="mdi" :path="path" size="3em"></svg-icon>
+        <v-icon>
+          mdi-logout
+        </v-icon>
       </v-btn>
     </v-app-bar>
 
-    <v-main class="d-flex align-center justify-center">
+    <v-main class="h-100 d-flex align-center justify-center">
       <router-view></router-view>
     </v-main>
   </v-layout>
@@ -15,23 +17,13 @@
 
 <script lang="ts">
 import { useSessionStore } from '@/stores/session/session.store';
-  import { defineComponent } from 'vue';
-  import SvgIcon from '@jamescoyle/vue-icon';
-  import { mdiLogout } from '@mdi/js';
+import { defineComponent } from 'vue';
 import { mapActions } from 'pinia';
-  
-  export default defineComponent({
-    name: 'AppView',
-    components: {
-    SvgIcon
-  },
+
+export default defineComponent({
+  name: 'AppView',
   methods: {
-        ...mapActions(useSessionStore, ['logout']),
-    },
-  data() {
-    return {
-       path: mdiLogout,
-    }
-  }
-  })
+    ...mapActions(useSessionStore, ['logout']),
+  },
+})
 </script>
