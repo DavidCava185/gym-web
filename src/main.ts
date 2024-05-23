@@ -14,8 +14,13 @@ import { VTimePicker } from 'vuetify/labs/VTimePicker'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'
 
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 
 const app = createApp(App)
+
+app.component('VueDatePicker', VueDatePicker);
 
 app.use(createPinia())
 app.use(router)

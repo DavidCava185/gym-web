@@ -22,22 +22,5 @@ export const useUsersStore = defineStore('users', {
                 console.error(err)
             }
         },
-
-        async updateUser(user: any): Promise<void> {
-            try {
-                await usersService.request({
-                    url: '',
-                    method: 'put',
-                    data: {
-                        name: user.name,
-                        surname: user.surname,
-                        email: user.email,
-                        password: user.password,
-                    }
-                });
-            } catch (err) {
-                console.error(err)
-            }
-        },
     }
 });

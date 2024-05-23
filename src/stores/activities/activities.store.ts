@@ -37,7 +37,7 @@ export const useActivitiesStore = defineStore('activities', {
         async updateActivity(activity: any): Promise<void> {
             try {
                 await activityService.request({
-                    url: '',
+                    url: `/${activity.id}`,
                     method: 'put',
                     data: {
                         name: activity.name,
@@ -68,6 +68,7 @@ export const useActivitiesStore = defineStore('activities', {
                     method: 'get',
                 });
                 this.activity = data;
+                return data;
             } catch (err) {
                 console.error(err)
             }
@@ -91,6 +92,7 @@ export const useActivitiesStore = defineStore('activities', {
                     url: ``,
                     method: 'get',
                 });
+                console.log(data)
                 this.activityTypes = data;
             } catch (err) {
                 console.error(err)
@@ -109,11 +111,11 @@ export const useActivitiesStore = defineStore('activities', {
             }
         },
         
-        async relateUserActivity(): Promise<void> {
+        async relateUserActivity(activityId: any, userId: any): Promise<void> {
             try {
-                const data = await roomService.request({
-                    url: ``,
-                    method: 'get',
+                const data = await activityService.request({
+                    url: `${activityId}/user/${userId}`,
+                    method: 'post',
                 });
                 this.activityTypes = data;
             } catch (err) {

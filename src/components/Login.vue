@@ -1,22 +1,29 @@
 <template>
   <div class="h-100 pt-10">
-    <v-sheet width="30em" class="h-100 d-flex flex-column justify-center">
-      <v-form v-model="isValidForm" fast-fail @submit.prevent="submitForm">
-        <v-text-field
-          v-model="email"
-          :rules="emailRules"
-          label="Email"
-        ></v-text-field>
-  
-        <v-text-field
-          v-model="password"
-          :rules="passwordRules"
-          label="Password"
-          type="password"
-        ></v-text-field>
-  
-        <v-btn class="mt-2" type="submit" color="red" block>Login</v-btn>
-      </v-form>
+    <v-sheet :color="$route.meta.isTrainer ? 'red' : 'white'" width="30em" rounded class="h-100 pa-10 d-flex flex-column justify-center">
+      <v-card>
+        <v-card-title>
+          Login {{ $route.meta.isTrainer ? 'Entrenador' : 'Usuario' }}
+        </v-card-title>
+        <v-card-text>
+          <v-form v-model="isValidForm" fast-fail @submit.prevent="submitForm">
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="Email"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              label="Password"
+              type="password"
+            ></v-text-field>
+
+            <v-btn class="mt-2" type="submit" color="red" block>Login</v-btn>
+          </v-form>
+        </v-card-text>
+      </v-card>
     </v-sheet>
   </div>
 </template>

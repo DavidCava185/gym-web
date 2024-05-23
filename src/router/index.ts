@@ -9,11 +9,13 @@ import UserProfile from '@/components/UserProfile.vue';
 import TrainerProfile from '@/components/TrainerProfile.vue';
 
 const authenticated: string | null = ls.get('authenticated');
+const isTrainer: string | null = ls.get('is-trainer');
 
 const routes: any = [
   {
     path: '/pathMatch(.*)*',
     redirect: (): any => {
+
       if (authenticated) {
         return { name: 'app' };
       } else {
