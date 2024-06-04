@@ -182,9 +182,10 @@ export default defineComponent({
     ...mapActions(useActivitiesStore, ['getAllActivities', 'createActivity', 'getAllRooms', 'getAllActivityTypes', 'getOneActivity', 'deleteActivity', 'updateActivity']),
     async submitActivity() {
       const { valid } = await this.$refs['createActivity'].validate()
-      if (this.activityForm.id) {
+      if (this.activityForm.id && valid) {
         await this.updateLocalActivity()
         this.isDialogActive = false
+        this.$refs['createActivity'].reset()
         return
       }
 

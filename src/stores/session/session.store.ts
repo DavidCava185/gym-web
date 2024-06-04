@@ -22,7 +22,7 @@ export const useSessionStore = defineStore('session', {
     },
 
     isTrainer() {
-      return (ls.get('is-trainer') === 'true');
+      return (ls.get('is-trainer'));
     }
 
   },

@@ -38,7 +38,7 @@ import { defineComponent } from 'vue';
     name: 'Login',
     data: () => ({
       isValidForm: false,
-      email: 'hugo@user.com',
+      email: 'user@user.com',
       emailRules: [
         (value: any) => {
           if (value) return true
